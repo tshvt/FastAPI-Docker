@@ -23,9 +23,9 @@ Listing containers must show two containers running and the port mapping as belo
 
 ```
 $ docker ps
-CONTAINER ID   IMAGE        COMMAND                  CREATED       STATUS          PORTS                            NAMES
-c6450b8342f2   bewise_web   "uvicorn app.main:ap…"   4 hours ago   Up 18 minutes   80/tcp, 0.0.0.0:8000->8000/tcp   fastapi-application
-655a1b2e4502   postgres     "docker-entrypoint.s…"   4 hours ago   Up 19 minutes   0.0.0.0:5432->5432/tcp           postgres
+CONTAINER ID   IMAGE        COMMAND                  CREATED         STATUS         PORTS                            NAMES
+aaa1e97d0d3d   bewise_web   "/wait-for-it.sh pg_…"   6 seconds ago   Up 4 seconds   80/tcp, 0.0.0.0:8000->8000/tcp   fastapi-application
+b0f778d1d004   postgres     "docker-entrypoint.s…"   7 seconds ago   Up 5 seconds   0.0.0.0:5432->5432/tcp           postgres
 ```
 After the application starts, navigate to `http://localhost:8000/docs` in your web browser and you should see the API documentation.
 
