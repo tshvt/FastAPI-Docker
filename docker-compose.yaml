@@ -1,0 +1,29 @@
+version: "3.9"
+
+volumes:
+  pg_project:
+
+services:
+  pg_db:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_USER: "myuser"
+      POSTGRES_DB: "mydb"
+    volumes:
+      - pg_project:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    command: ["/wait-for-it.sh", "pg_db:5432", "--", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    container_name: fastapi-application
+    environment:
+      PORT: 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - "pg_db"
